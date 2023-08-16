@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.team.mapper.OrderInfoMapper">
+	<select id="selectOrderInfoList"
+		resultType="com.team.vo.OrderInfoVO">
+		SELECT * FROM ORDER_INFO
+	</select>
+
+	<select id="selectOrderInfo"
+		resultType="com.team.vo.OrderInfoVO">
+		SELECT * FROM ORDER_INFO WHERE OI_NUM=#{oiNum}
+	</select>
+
+	<insert id="insertOrderInfo">
+		INSERT INTO ORDER_INFO(
+		OI_ID,OI_DATE,OI_NAME,OI_PHONE
+		,OI_ADDRESS,OI_AMOUNT,OI_PAYMENT,OI_DELIVERY)
+		VALUES(
+		#{oiId},DATE_FORMAT(NOW(),'%Y%m%d'),#{oiName},#{oiPhone}
+		,#{oiAddress},#{oiAmount},#{oiPayment},#{oiDelivery})
+	</insert>
+
+	<update id="updateOrderInfo">
+		UPDATE order_info
+		SET OI_ID=#{oiId},
+		OI_DATE=DATE_FORMAT(NOW(),'%Y%m%d'),
+		OI_NAME=#{oiName},
+		OI_PHONE=#{oiPhone},
+		OI_ADDRESS=#{oiAddress},
+		OI_AMOUNT=#{oiAmount},
+		OI_PAYMENT=#{oiPayment},
+		OI_DELIVERY=#{oiDelivery}
+		WHERE OI_NUM=#{oiNum}
+	</update>
+
+	<delete id="deleteOrderInfo">
+		DELETE FROM order_info
+		WHERE OI_NUM=#{oiNum}
+	</delete>
+</mapper>
